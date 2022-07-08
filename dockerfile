@@ -1,3 +1,6 @@
-FROM httpd:2.4
-COPY ./public-html/ /usr/local/apache2/htdocs/
-
+FROM ubuntu
+RUN apt-get update
+RUN DEBIAN_FRONTEND="noninterative" apt-get -y install tzdata
+RUN apt-get install apache2 -y
+ADD . /var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
